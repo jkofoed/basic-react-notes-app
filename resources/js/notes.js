@@ -3,8 +3,8 @@
 class Notes extends React.Component {
 
     render() {
-        {this.props.notes && this.props.notes.map(note => {
-            return (    
+        return (  
+            {this.stage.notes && this.stage.notes.map(note => {
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1">
                         <div class="p-2">
@@ -22,13 +22,15 @@ class Notes extends React.Component {
                         </div>
                     </div>
                 </div>
-            );
-        })}
+            })}    
+        );
+        
     }
 }
 
 
 class App extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +46,7 @@ class App extends React.Component {
   }
 
    componentDidMount() {
-     // get all entities - GET
+    // get all entities - GET
      fetch("http://notes.local:8000/api/notes", {
         "method": "GET",
         "headers": {
@@ -130,7 +132,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { notes, id, note } = this.state;
     return (
         <div className="container">
           <div className="row justify-content-center">
