@@ -1,30 +1,27 @@
 'use strict';
 
 class Notes extends React.Component {
-
-    render() {
-        return (  
-            {this.stage.notes && this.stage.notes.map(note => {
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1">
-                        <div class="p-2">
-                            <div class="flex items-center">
-                                <div class="ml-4 text-lg leading-7 font-semibold">
-                                    { note._id } 
-                                </div>
+    render() {            
+        {this.props.notes && this.props.notes.map(note => {
+            return
+            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div class="grid grid-cols-1">
+                    <div class="p-2">
+                        <div class="flex items-center">
+                            <div class="ml-4 text-lg leading-7 font-semibold">
+                                { note._id } 
                             </div>
+                        </div>
 
-                            <div class="ml-4">
-                                <div class="mt-2 mr-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    { note.note }
-                                </div>
+                        <div class="ml-4">
+                            <div class="mt-2 mr-2 text-gray-600 dark:text-gray-400 text-sm">
+                                { note.note }
                             </div>
                         </div>
                     </div>
                 </div>
-            })}    
-        );
-        
+            </div>
+        })}          
     }
 }
 
@@ -45,9 +42,9 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-   componentDidMount() {
+  componentDidMount() {
     // get all entities - GET
-     fetch("http://notes.local:8000/api/notes", {
+    fetch("http://notes.local:8000/api/notes", {
         "method": "GET",
         "headers": {
             "content-type": "application/json",

@@ -2135,7 +2135,8 @@ var Notes = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       {
         this.props.notes && this.props.notes.map(function (note) {
-          return /*#__PURE__*/React.createElement("div", {
+          return;
+          /*#__PURE__*/React.createElement("div", {
             "class": "mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
           }, /*#__PURE__*/React.createElement("div", {
             "class": "grid grid-cols-1"
@@ -2174,28 +2175,27 @@ var App = /*#__PURE__*/function (_React$Component2) {
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
   }
+
+  //    componentDidMount() {
+  //     // get all entities - GET
+  //      fetch("http://notes.local:8000/api/notes", {
+  //         "method": "GET",
+  //         "headers": {
+  //             "content-type": "application/json",
+  //             "accept": "application/json"
+  //         }
+  //         })
+  //         .then(response => response.json())
+  //         .then(response => {
+  //             this.setState({
+  //                 notes: response.data
+  //             });
+  //         })
+  //         .catch(err => {
+  //         console.log(err);
+  //         });
+  //    }
   _createClass(App, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-      // get all entities - GET
-      fetch("http://notes.local:8000/api/notes", {
-        "method": "GET",
-        "headers": {
-          "content-type": "application/json",
-          "accept": "application/json"
-        }
-      }).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this2.setState({
-          notes: response.data
-        });
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, {
     key: "create",
     value: function create(e) {
       // add entity - POST
@@ -2268,11 +2268,7 @@ var App = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-      var _this$state = this.state,
-        notes = _this$state.notes,
-        id = _this$state.id,
-        note = _this$state.note;
+      var _this2 = this;
       return /*#__PURE__*/React.createElement("div", {
         className: "container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -2281,9 +2277,7 @@ var App = /*#__PURE__*/function (_React$Component2) {
         className: "col-md-8"
       }, /*#__PURE__*/React.createElement("h1", {
         className: "display-4 text-center"
-      }, "Notepad"), /*#__PURE__*/React.createElement(Notes, {
-        notes: this.state.notes
-      }), /*#__PURE__*/React.createElement("form", {
+      }, "Notepad"), /*#__PURE__*/React.createElement("form", {
         className: "d-flex flex-column"
       }, /*#__PURE__*/React.createElement("legend", {
         className: "text-center"
@@ -2296,7 +2290,7 @@ var App = /*#__PURE__*/function (_React$Component2) {
         className: "form-control",
         value: this.state.note,
         onChange: function onChange(e) {
-          return _this3.handleChange({
+          return _this2.handleChange({
             notes: e.target.value
           });
         },
@@ -2305,7 +2299,7 @@ var App = /*#__PURE__*/function (_React$Component2) {
         className: "btn btn-primary",
         type: "button",
         onClick: function onClick(e) {
-          return _this3.create(e);
+          return _this2.create(e);
         }
       }, "Add")))));
     }
