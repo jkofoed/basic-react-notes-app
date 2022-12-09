@@ -33,30 +33,62 @@
                 </div>
 
                 <div id="App"></div>
-                {{--
+                
                 @foreach($notes as $note)
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1">
                         <div class="p-2">
-                            <div class="flex items-center">
+                            <div class="flex">
+                                <div class="btn btn-danger text-lg font-semibold" onclick="noteDelete({{ $note->id }});">[X]</div> 
                                 <div class="ml-4 text-lg leading-7 font-semibold">
-                                    {{ $notes->id }} 
+                                    {{ $note->id }} 
                                 </div>
-                            </div>
-
-                            <div class="ml-4">
-                                <div class="mt-2 mr-2 text-gray-600 dark:text-gray-400 text-sm">
-                                {{ $notes->note }}
+                                <div class="ml-4">
+                                    <input type="text" id="note{{$note->id}}" name="note[{{ $note->id }}]" value="{{ $note->note }}" />
                                 </div>
+                                <div class="btn btn-warning" onclick="noteUpdate({{$note->id}}, $('#note{{$note->id}}').value)">Update</div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
-                --}}
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                    <div class="grid grid-cols-1">
+                        <div class="p-2">
+                            <div class="flex">
+                                <input type="text" class="form-control" id="note" name="note" value="" />
+                                <button class="btn btn-success ml-2" onclick="noteAdd($('#note').value)">[+]</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <script type="text/javascript">
+            function noteDelete(noteId) {
+                fetch('http://notes.local:8000/api/notes/'+noteId, {method: 'DELETE', body: {'id': noteId}})
+                .then((response) => {
+                    alert(response);
+                    console.log(response);
+                });
+            }
 
+            function noteUpdate(noteId, note) {
+                fetch('http://notes.local:8000/api/notes/'+noteId, {method: 'PUT', body: {'id': noteId, 'note': note}})
+                .then((response) => {
+                    alert(response);
+                    console.log(response);
+                });
+            }
+
+            function noteAdd(note) {
+                fetch('http://notes.local:8000/api/notes/', {method: 'POST', body: {'note': note}})
+                    .then((response) => {
+                        alert(response);
+                    });
+            }
+        </script>
         <!--loading react -->
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>

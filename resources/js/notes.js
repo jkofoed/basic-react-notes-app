@@ -1,6 +1,7 @@
 'use strict';
 
 class Notes extends React.Component {
+
     render() {            
         {this.props.notes && this.props.notes.map(note => {
             return
@@ -53,9 +54,7 @@ class App extends React.Component {
         })
         .then(response => response.json())
         .then(response => {
-            this.setState({
-                notes: response.data
-            });
+            this.state.notes = response.data
         })
         .catch(err => {
         console.log(err);
